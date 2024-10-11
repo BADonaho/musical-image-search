@@ -1,24 +1,34 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
 
+// An app that plays a song and displays related images based on the given search query.
 function App() {
+  const [query, setQuery] = useState('');
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        Musical Image Search
+        <SearchBar
+          query={query}
+          onQueryChange={setQuery} />
+        </header>
     </div>
+  );
+}
+
+// The search bar where a user types in a query.
+function SearchBar({
+  query,
+  onQueryChange,
+}) {
+  return (
+    <form>
+      <input className="App-header"
+        type="text"
+        value={query} placeholder="Search..."
+        onChange={(e) => onQueryChange(e.target.value)} />
+    </form>
   );
 }
 
