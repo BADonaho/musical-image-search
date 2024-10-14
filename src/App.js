@@ -10,6 +10,19 @@ const pexelsApiKey = 'DUWicv6s2TgfvcEPtCxo06pDNbXe3lHn6yRJMrah3Nt1yKDT0myyipcV'
 
 // An app that plays a song and displays related images based on the given search query.
 function App() {
+  return (
+    <>
+      <header className="Vertical">Musical Image Search</header>
+      <Body />
+    </>
+  );
+}
+
+// Page where user can sarch for music and images.
+function Body() {
+  let searchQuery = '';
+  let searchResults = [];
+
   // The OAuth token used by Spotify to authenticate the current user.
   const [accessToken, setAccessToken] = useState('');
 
@@ -23,23 +36,8 @@ function App() {
     }
   }, []);
 
-  return (
-    <>
-      <header className="Vertical">Musical Image Search</header>
-      {!accessToken
-        ? <a className="Vertical" href={spotifyAuthUrl}>Log in with Spotify</a>
-        : <Search accessToken={accessToken} />}
-    </>
-  );
-}
-
-// Page where user can sarch for music and images.
-function Search({accessToken}) {
-  let searchQuery = '';
-  let searchResults = [];
-
   // Fetch music tracks based on the search query.
-  async function handleSearchTracks() {
+  async function searchTracks() {
     if (!searchQuery) return;
     const response = await fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(searchQuery)}&type=track`, {
       headers: {
@@ -61,7 +59,7 @@ function Search({accessToken}) {
   }
 
   // Fetch images based on the search query.
-  async function handleSearchPhotos() {
+  async function searchPhotos() {
     if (!searchQuery) return;
     const perPage = 7;
     const url = `https://api.pexels.com/v1/search?query=${encodeURIComponent(searchQuery)}&per_page=${perPage}`;
@@ -97,26 +95,27 @@ function Search({accessToken}) {
     });
   }
 
+  function handleSearch() {
+    searchTracks();
+    searchPhotos();
+  }
+
   return (
-    <>
-      <div className="Horizontal">
-        <SearchBar searchQuery={searchQuery} onSearchQueryChange={(value) => searchQuery = value} onSearch={() => {
-          handleSearchTracks();
-          handleSearchPhotos();
-        }} />
-        <SearchButton onSearch={() => {
-          handleSearchTracks();
-          handleSearchPhotos();
-        }} />
-        <audio id="audio-player" controls style={{display: 'none'}}></audio>
-      </div>
-      <div id="photo-container"></div>
-    </>
+    !accessToken
+      ? <a className="Vertical" href={spotifyAuthUrl}>Log in with Spotify</a>
+      : <>
+          <div className="Horizontal">
+            <SearchInput searchQuery={searchQuery} onSearchQueryChange={(value) => searchQuery = value} onSearch={handleSearch} />
+            <SearchButton onSearch={handleSearch} />
+            <audio id="audio-player" controls style={{display: 'none'}}></audio>
+          </div>
+          <div id="photo-container"></div>
+        </>
   );
 }
 
 // The search bar where a user types in a query.
-function SearchBar({searchQuery, onSearchQueryChange, onSearch}) {
+function SearchInput({searchQuery, onSearchQueryChange, onSearch}) {
   // The search query currently typed in the search bar.
   const [query, setQuery] = useState(searchQuery);
 

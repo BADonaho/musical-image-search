@@ -4,12 +4,26 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Project Installation
 
-To run this project, you need to have NodeJS installed.
+Prerequisites:
+1. You need to have NodeJS installed.
+2. You need a Spotify account.
 
 To install and run this project:
 1. Download the project from the GitHub repository at [https://github.com/BADonaho/musical-image-search](https://github.com/BADonaho/musical-image-search).
 2. Run 'npm install'.
 3. Run 'npm start'.
+
+## Project Structure
+
+App (column layout)
+|__ Header
+|__ Body (changes between states)
+    |_____ Spotify Log In
+    |_____ Search (column layout, rebuilds when searching, sources from Spotify)
+           |_____ Search Bar (row layout)
+           |      |_________ Search Input
+           |      |_________ Search Button
+           |_____ Images (visible with music during successful search, flexible to screen layout, sources from Pexels)
 
 ## Available Scripts
 
