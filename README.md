@@ -15,6 +15,7 @@ To install and run this project:
 
 ## Project Structure
 
+```
 App (column layout)
 |__ Header
 |__ Body (changes between states)
@@ -24,6 +25,7 @@ App (column layout)
            |      |_________ Search Input
            |      |_________ Search Button
            |_____ Images (visible with music during successful search, flexible to screen layout, sources from Pexels)
+```
 
 ## Available Scripts
 
