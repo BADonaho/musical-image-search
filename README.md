@@ -1,6 +1,15 @@
-# Getting Started with Create React App
+# Getting Started with Musical Image Search
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Project Installation
+
+To run this project, you need to have NodeJS installed.
+
+To install and run this project:
+1. Download the project from the GitHub repository at [https://github.com/BADonaho/musical-image-search](https://github.com/BADonaho/musical-image-search).
+2. Run 'npm install'.
+3. Run 'npm start'.
 
 ## Available Scripts
 

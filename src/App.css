@@ -1,13 +1,34 @@
-.App {
-  text-align: center;
-}
-
-.App-header {
+.Vertical {
   min-height: 50px;
   margin: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
+}
+
+.Horizontal {
+  min-height: 50px;
+  margin: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+}
+
+#photo-container{
+  margin: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+#photo-container img {
+  max-width: calc(100% / 3 - 20px);
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
 }
